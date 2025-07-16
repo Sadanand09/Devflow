@@ -13,11 +13,11 @@ const compat = new FlatCompat({
 
 export default [
   ...compat.extends(
-    "next/core-web-vitals",
+    ["next/core-web-vitals",
     "next/typescript",
     "standard",
    //"plugin:tailwindcss/recommended",
-    "prettier"
+    "prettier"]
   ),
   {
     files: ["**/*.ts", "**/*.tsx"],
