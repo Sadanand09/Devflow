@@ -9,13 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-n": "^17.21.0",
-    "eslint-plugin-promise": "^7.2.1",
-    "eslint-plugin-tailwindcss": "^3.18.0",
     "next": "15.4.1",
-    "prettier": "^3.6.2",
+    "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -26,10 +21,21 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.1",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.32.0",
-    "tailwindcss": "^4.1.11",
+    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-tailwindcss": "^3.14.1",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5"
+  },
+  "packageManager": "npm@10.7.0",
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "tailwindcss": "$tailwindcss"
   }
 }
