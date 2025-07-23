@@ -346,6 +346,14 @@
   }
 }
 
+.bg-auth-light{
+  background-image: url(../public/images/auth-light.png);
+}
+
+.bg-auth-light{
+  background-image: url(../public/images/auth-dark.png);
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 3px;
   height: 3px;
