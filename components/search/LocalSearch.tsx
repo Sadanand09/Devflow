@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { formUrlQuery } from "@/lib/url";
 
 interface Props{
     route: string;
@@ -18,9 +19,20 @@ const LocalSearch = ({ route, imgSrc, placeholder, otherClasses }: Props) => {
     const query = searchParams.get("query") || "";
 
     const [searchQuery, setSearchQuery] = useState(query);
+
+    useEffect(() => {
+        if (searchQuery) {
+            const newUrl = formUrlQuery({
+                params: searchParams.toString(),
+                key: "query",
+                value: searchQuery,
+            });
+        }
+    }, [searchQuery]);
     
   return (
       <div className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-10px px-4 ${otherClasses}`}>
+          {searchParams.toString()}
           <Image src={imgSrc} width={24} height={24} alt="Search" className="cursor-pointer" />
       <Input
         type="text"
