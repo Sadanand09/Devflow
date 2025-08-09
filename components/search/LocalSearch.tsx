@@ -5,6 +5,7 @@ import { Input } from "../ui/input";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { formUrlQuery } from "@/lib/url";
+import { useRouter } from "next/router";
 
 interface Props{
     route: string;
@@ -15,6 +16,7 @@ interface Props{
 
 const LocalSearch = ({ route, imgSrc, placeholder, otherClasses }: Props) => {
     
+    const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
 
@@ -27,6 +29,8 @@ const LocalSearch = ({ route, imgSrc, placeholder, otherClasses }: Props) => {
                 key: "query",
                 value: searchQuery,
             });
+
+            router.push(newUrl, { scroll: false });
         }
     }, [searchQuery]);
     
