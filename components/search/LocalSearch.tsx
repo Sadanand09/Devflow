@@ -2,46 +2,66 @@
 
 import Image from "next/image";
 import { Input } from "../ui/input";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { formUrlQuery } from "@/lib/url";
-import { useRouter } from "next/router";
+import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/url";
 
-interface Props{
-    route: string;
-    imgSrc: string;
-    placeholder: string;
-    otherClasses?: string;
+interface Props {
+  route: string;
+  imgSrc: string;
+  placeholder: string;
+  otherClasses?: string;
 }
 
 const LocalSearch = ({ route, imgSrc, placeholder, otherClasses }: Props) => {
-    
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const query = searchParams.get("query") || "";
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
 
-    const [searchQuery, setSearchQuery] = useState(query);
+  const [searchQuery, setSearchQuery] = useState(query);
 
-    useEffect(() => {
-        if (searchQuery) {
-            const newUrl = formUrlQuery({
-                params: searchParams.toString(),
-                key: "query",
-                value: searchQuery,
-            });
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchQuery) {
+        const newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: "query",
+          value: searchQuery,
+        });
 
-            router.push(newUrl, { scroll: false });
+        router.push(newUrl, { scroll: false });
+      } else {
+        if (pathname === route) {
+          const newUrl = removeKeysFromUrlQuery({
+            params: searchParams.toString(),
+            keysToRemove: ["query"],
+          });
+          router.push(newUrl, { scroll: false });
         }
-    }, [searchQuery]);
-    
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(delayDebounceFn);
+    };
+  }, [searchQuery, router, route, searchParams, pathname]);
+
   return (
-      <div className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-10px px-4 ${otherClasses}`}>
-          {searchParams.toString()}
-          <Image src={imgSrc} width={24} height={24} alt="Search" className="cursor-pointer" />
+    <div
+      className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-10px px-4 ${otherClasses}`}
+    >
+      <Image
+        src={imgSrc}
+        width={24}
+        height={24}
+        alt="Search"
+        className="cursor-pointer"
+      />
       <Input
         type="text"
         placeholder={placeholder}
-              value={ searchQuery }
+        value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="paragraph-regular no-focus placeholder:text-dark400_light700 shadow-none border-none outline-none"
       />
