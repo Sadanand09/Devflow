@@ -72,7 +72,7 @@ export const UserSchema = z.object({
   name: z.string().min(1, { message: "Name is required." }),
   username: z
     .string()
-    .min(3, { message: "Username must be at least 3 characteers long." }),
+    .min(3, { message: "Username must be at least 3 characters long." }),
   email: z.string().email({ message: "Please provide a valid email address." }),
   bio: z.string().optional(),
   image: z.string().url({ message: "Please provide a valid URL." }).optional(),
@@ -83,7 +83,6 @@ export const UserSchema = z.object({
     .optional(),
   reputation: z.number().optional(),
 });
-
 
 export const AccountSchema = z.object({
   userId: z.string().min(1, { message: "User ID is required." }),
@@ -108,4 +107,21 @@ export const AccountSchema = z.object({
   providerAccountId: z
     .string()
     .min(1, { message: "Provider Account ID is required." }),
+});
+
+export const SignInWithOAuthSchema = z.object({
+  provider: z.enum(["google", "github"]),
+  providerAccountId: z
+    .string()
+    .min(1, { message: "Provider Account ID is required." }),
+  user: z.object({
+    name: z.string().min(1, { message: "Name is required." }),
+    username: z
+      .string()
+      .min(3, { message: "Username must be at least 3 characters long." }),
+    email: z
+      .string()
+      .email({ message: "Please provide a valid email address." }),
+    image: z.string().url("Invalid image URL").optional(),
+  }),
 });
