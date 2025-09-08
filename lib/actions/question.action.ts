@@ -16,7 +16,6 @@ import {
   PaginatedSearchParamsSchema,
 } from "../validations";
 
-
 export async function createQuestion(
   params: CreateQuestionParams
 ): Promise<ActionResponse<Question>> {
@@ -316,7 +315,6 @@ export async function incrementViews(
     question.views += 1;
 
     await question.save();
-
 
     return {
       success: true,
