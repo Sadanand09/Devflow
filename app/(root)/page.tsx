@@ -10,6 +10,8 @@ import { HomePageFilters } from "@/constants/filters";
 import ROUTES from "@/constants/routes";
 import { EMPTY_QUESTION } from "@/constants/states";
 import { getQuestions } from "@/lib/actions/question.action";
+import Pagination from "@/components/Pagination";
+
 
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
@@ -20,7 +22,7 @@ const Home = async ({ searchParams }: SearchParams) => {
 
   const { success, data, error } = await getQuestions({
     page: Number(page) || 1,
-    pageSize: Number(pageSize) || 10,
+    pageSize: Number(pageSize) || 2,
     query: query || "",
     filter: filter || "",
   });
@@ -68,6 +70,7 @@ const Home = async ({ searchParams }: SearchParams) => {
           </div>
         )}
       />
+      <Pagination />
     </>
   );
 };
