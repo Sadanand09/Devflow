@@ -64,6 +64,10 @@ interface HasVotedResponse {
   hasDownvoted: boolean;
 }
 
-interface CollectionBaseParams{
+interface CollectionBaseParams {
   questionId: string;
+}
+
+interface getUserParams {
+  userId: string;
 }
