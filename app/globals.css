@@ -350,6 +350,10 @@
   background-image: url(../public/images/auth-light.png);
 }
 
+.link{
+  color: #1da1f2;
+}
+
 .bg-auth-light{
   background-image: url(../public/images/auth-dark.png);
 }
