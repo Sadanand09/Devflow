@@ -6,7 +6,6 @@ import { getTimeStamp } from "@/lib/utils";
 
 import TagCard from "./TagCard";
 import Metric from "../Metric";
-import { Edit } from "lucide-react";
 import EditDeleteAction from "../user/EditDeleteAction";
 
 interface Props {

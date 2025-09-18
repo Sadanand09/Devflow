@@ -8,7 +8,7 @@ import {
   SubmitHandler,
   Path,
 } from "react-hook-form";
-import { success, z, ZodType } from "zod";
+import { ZodType } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -50,22 +50,17 @@ const AuthForm = <T extends FieldValues>({
     const result = (await onSubmit(data)) as ActionResponse;
 
     if (result?.success) {
-      toast({
-        title: "Success",
-        description:
-          formType === "SIGN_IN"
-            ? "signed in successfully"
-            : "signed up successfully",
-      });
+      toast.success(
+        formType === "SIGN_IN"
+          ? "Signed in successfully"
+          : "Signed up successfully"
+      );
       router.push(ROUTES.HOME);
     } else {
-      toast({
-        title: `Error ${result?.status}`,
-        description: result?.error?.message,
-        varient: "destructive",
-      });
+      toast.error(result?.error?.message || `Error ${result?.status || ""}`);
     }
   };
+
 
   const buttonText = formType === "SIGN_IN" ? "Sign In" : "Sign Up";
 

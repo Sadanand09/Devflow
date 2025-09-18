@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "sonner";
+
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/sonner";
+
 
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
@@ -52,6 +54,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           >
             {children}
           </ThemeProvider>
+          <Toaster />
           {/* <Toaster richColors position="top-center" /> */}
         </body>
       </SessionProvider>

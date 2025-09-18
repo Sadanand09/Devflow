@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import { notFound, redirect } from "next/navigation";
 import ROUTES from "@/constants/routes";
 import { getQuestion } from "@/lib/actions/question.action";
-import { success } from "zod";
+
 
 const EditQuestion = async ({ params }: RouteParams) => {
   const { id } = await params;

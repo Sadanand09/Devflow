@@ -13,30 +13,32 @@ const SocialAuthForm = () => {
   const buttonClass =
     "background-dark400_light900 body-medium text-dark200_light800 rounded-2 min-h-12 flex-1 px-4 py-3.5 mx-1";
 
-  const handleSignIn = async (provider: "gitHub" | "google") => {
+  const handleSignIn = async (provider: "github" | "google") => {
     try {
-      await signIn(provider, {
+      const result = await signIn(provider, {
         callbackUrl: ROUTES.HOME,
         redirect: false,
       });
-    } catch (error) {
-      console.log(error);
 
-      toast(
-        <div>
-          <p className="font-semibold">Sign-in Failed</p>
-          <p className="text-sm text-muted-foreground">Something went wrong</p>
-        </div>
-      );
+      if (result?.error) {
+        toast.error("Sign-in failed. Please try again.");
+      } else {
+        toast.success(
+          `Signed in with ${provider === "github" ? "GitHub" : "Google"}`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong during sign-in");
     }
   };
 
   return (
-    <div className="mt-10 flex flex-wrap gap2.5">
-      <Button className={buttonClass} onClick={() => handleSignIn("gitHub")}>
+    <div className="mt-10 flex flex-wrap gap-2.5">
+      <Button className={buttonClass} onClick={() => handleSignIn("github")}>
         <Image
           src="/icons/github.svg"
-          alt="Github Logo"
+          alt="GitHub Logo"
           height={20}
           width={20}
           className="invert-colors mr-2.5 object-contain"
