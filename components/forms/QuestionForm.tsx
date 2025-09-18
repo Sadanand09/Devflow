@@ -103,7 +103,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
         if (result.success) {
           toast.success("Question updated successfully");
           //how can i get rid of this error
-          // @ts-ignore
+          // @ts-expect-error
           if (result.data) router.push(ROUTES.QUESTION(result.data._id));
         } else {
           toast.error(result.error?.message || `Error ${result.status}`);
